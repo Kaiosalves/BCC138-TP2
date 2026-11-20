@@ -12,15 +12,33 @@ public class ProdutoDigital extends Produto {
         // TODO
     }
 
-    public double getTamanhoMb() { throw new UnsupportedOperationException("TODO"); }
-    public void setTamanhoMb(double tamanhoMb) { throw new UnsupportedOperationException("TODO"); }
-    public String getLinkDownload() { throw new UnsupportedOperationException("TODO"); }
-    public void setLinkDownload(String linkDownload) { throw new UnsupportedOperationException("TODO"); }
+    public double getTamanhoMb() {
+        return this.tamanhoMb;
+    }
+    public void setTamanhoMb(double tamanhoMb) {
+        if(tamanhoMb < 0){
+            throw new IllegalArgumentException("Tamanho negativo não permitido");
+        }
+        this.tamanhoMb = tamanhoMb;
+    }
+    public String getLinkDownload() {
+        return linkDownload;
+    }
+    public void setLinkDownload(String linkDownload) {
+        if(linkDownload == null || linkDownload.trim().isEmpty()){throw new IllegalArgumentException("O link do produto não pode estar vazio");}
+        this.linkDownload = linkDownload.trim();
+    }
 
-    @Override public boolean temEstoqueLimitado() { throw new UnsupportedOperationException("TODO"); }
-    @Override public boolean estaDisponivel(int quantidade) { throw new UnsupportedOperationException("TODO"); }
-    @Override public double calcularFreteVariavel(int quantidade) { throw new UnsupportedOperationException("TODO"); }
-    @Override public boolean exigeEntrega() { throw new UnsupportedOperationException("TODO"); }
-    @Override public String getTipo() { throw new UnsupportedOperationException("TODO"); }
-    @Override public String atributosEspecificosParaTexto() { throw new UnsupportedOperationException("TODO"); }
+    @Override public boolean temEstoqueLimitado() {
+        return false;
+    }
+    @Override public boolean estaDisponivel(int quantidade) {
+        return true;
+    }
+    @Override public double calcularFreteVariavel(int quantidade) {return 0;}
+    @Override public boolean exigeEntrega() {return false;}
+    @Override public String getTipo() {return "DIGITAL";}
+    @Override public String atributosEspecificosParaTexto() {
+        return String.format(";%2f;%s", tamanhoMb, linkDownload);
+    }
 }

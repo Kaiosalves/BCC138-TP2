@@ -107,8 +107,12 @@ public abstract class Produto {
     }
 
     /** Serializa o produto em uma linha do arquivo produtos.txt. */
-    public String paraLinhaTexto() { throw new UnsupportedOperationException("TODO"); }
+    public String paraLinhaTexto() { 
+        return String.format("%s;%s;%s;%s;%s;%2f;%d",getTipo(),codigo,nome, descricao, categoria,preco,estoque) + atributosEspecificosParaTexto();
+    }
 
     @Override
-    public String toString() { throw new UnsupportedOperationException("TODO"); }
+    public String toString() { 
+        return codigo + "-" + nome + "-" + (this.categoria) + "-" + preco;
+    }
 }
